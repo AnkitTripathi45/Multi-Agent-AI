@@ -1,5 +1,5 @@
 import streamlit as st
-from phi.agent import Agent
+from phi.agent import Agent, RunResponse
 from phi.model.groq import Groq
 from phi.tools.yfinance import YFinanceTools
 from phi.tools.duckduckgo import DuckDuckGo
@@ -46,7 +46,7 @@ user_input = st.text_area("Enter your question here:")
 if st.button("Get Answer"):
    if user_input.strip():
        with st.spinner("Processing..."):
-           response = agent_team.run(user_input)
-           st.markdown(response)
+           run: RunResponse = agent_team.run(user_input)
+           st.markdown(run.content)
    else:
        st.warning("Please enter a question before submitting.")
