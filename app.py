@@ -35,7 +35,6 @@ agent_team = Agent(
    instructions=["Always include sources", "Use tables to display data"],
    show_tool_calls=True,
    markdown=True,
-   debug_mode=True,
 )
 
 # Streamlit app interface
@@ -47,7 +46,7 @@ user_input = st.text_area("Enter your question here:")
 if st.button("Get Answer"):
    if user_input.strip():
        with st.spinner("Processing..."):
-           response = agent_team.get_response(user_input)
+           response = agent_team.run(user_input)
            st.markdown(response)
    else:
        st.warning("Please enter a question before submitting.")

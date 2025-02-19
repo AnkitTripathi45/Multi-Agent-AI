@@ -1,6 +1,6 @@
 streamlit
 phidata
-dotenv
+python-dotenv
 groq
 yfinance
 openai
