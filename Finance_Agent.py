@@ -5,13 +5,14 @@ from phi.tools.duckduckgo import DuckDuckGo
 from phi.model.openai import OpenAIChat
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(override=True)
+
 
 
 web_agent = Agent(
     name="Web Agent",
-    # model=OpenAIChat(id="gpt-4o"),
-    model = Groq(id = "llama-3.3-70b-versatile"),
+    model=OpenAIChat(id="gpt-4o"),
+    # model = Groq(id = "llama-3.3-70b-versatile"),
     tools=[DuckDuckGo()],
     show_tool_calls=True,
     markdown=True,
@@ -22,7 +23,8 @@ web_agent = Agent(
 finance_agent = Agent(
     name="Finance Agent",
     role="Get Financial Data",
-    model = Groq(id = "llama-3.3-70b-versatile"),
+    # model = Groq(id = "llama-3.3-70b-versatile"),
+    model=OpenAIChat(id="gpt-4o"),
     tools=[YFinanceTools(stock_price= True, analyst_recommendations=True, stock_fundamentals=True)],
     show_tool_calls=True,
     markdown=True,
@@ -31,7 +33,8 @@ finance_agent = Agent(
 
 agent_team= Agent(
     team=[web_agent,finance_agent],
-    model = Groq(id = "llama-3.3-70b-versatile"),
+    # model = Groq(id = "llama-3.3-70b-versatile"),
+    model=OpenAIChat(id="gpt-4o"),
     instructions=["Always Include Sources","Use Tables to Display Data"],
     show_tool_calls=True,
     markdown=True,
